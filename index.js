@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const prisma = require("./db")
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -15,22 +15,22 @@ app.get("/", (req, res) => {
 })
 
 app.get("/products", (req, res) => {
-  const { name, minHarga } = req.query
+    const { name, minHarga } = req.query
 
-  let result = products
+    let result = products
 
-  if (name) {
-    result = result.filter(p =>
-      p.name.toLowerCase().includes(name.toLowerCase())
-    )
-  }
+    if (name) {
+        result = result.filter(p =>
+            p.name.toLowerCase().includes(name.toLowerCase())
+        )
+    }
 
-  if (minHarga) {
-    const min = parseInt(minHarga)
-    result = result.filter(p => p.harga >= min)
-  }
+    if (minHarga) {
+        const min = parseInt(minHarga)
+        result = result.filter(p => p.harga >= min)
+    }
 
-  res.json(result)
+    res.json(result)
 })
 
 app.post("/products", (req, res) => {
@@ -129,8 +129,8 @@ app.delete("/products/:id", (req, res) => {
 // })
 
 
-app.listen(port, () => {
-    console.log("server berjalan di http://localhost:3000");
+app.listen(PORT, () => {
+    console.log(`server berjalan di ${PORT}`);
 
 })
 
