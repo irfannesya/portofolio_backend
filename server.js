@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 const { data } = require("autoprefixer")
 const { use } = require("react")
 const { token } = require("morgan")
-const authMiddleware = require("./middleware/auth")
+const authMiddleware = require("./src/middleware/auth")
 const jwt = require("jsonwebtoken")
 
 app.use(express.json())
