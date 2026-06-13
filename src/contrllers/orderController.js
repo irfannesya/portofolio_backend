@@ -1,12 +1,12 @@
-const { product } = require("../db")
-const prisma = require("../db")
+const { product } = require("../../db")
+const prisma = require("../../db")
 
 exports.createOrder = async (req, res) => {
     try {
         const { productId, quantity } = req.body
 
-        if (!productId || typeof quantity !== "number" || quantity<= 0){
-            return res.status(400).json({message: "Data tidak valid"})
+        if (!productId || typeof quantity !== "number" || quantity <= 0) {
+            return res.status(400).json({ message: "Data tidak valid" })
         }
 
         const order = await prisma.order.create({
@@ -23,9 +23,9 @@ exports.createOrder = async (req, res) => {
     }
 }
 
-exports.getOrder = async(req, res) =>{
+exports.getOrder = async (req, res) => {
     const order = await prisma.order.findMany({
-        where: { userId: req.user.id},
+        where: { userId: req.user.id },
         include: {
             product: true
         }
